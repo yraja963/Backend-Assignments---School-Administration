@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const StudentArray = require("./InitialData");
 const port = 8080
 app.use(express.urlencoded());
-let localStudentArray=[...StudentArray];
+const localStudentArray=[...StudentArray];
 let maxId=localStudentArray.length;
 
 // Parse JSON bodies (as sent by API clients)
@@ -78,7 +78,7 @@ app.put("/api/student/:id",(req,res) => {
         if(matched === -1){
             res.sendStatus(404);
         }else{
-            localStudentArray = localStudentArray.splice(matched,1);
+            localStudentArray.splice(matched,1);
             res.sendStatus(200);
         }
     });
