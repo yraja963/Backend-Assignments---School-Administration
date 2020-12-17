@@ -39,6 +39,7 @@ app.post("/api/student",(req,res) => {
         const newId = maxId + 1;
         maxId = newId;
         newStudent.id = newId;
+        newStudent.currentClass=Number(currentClass);
         localStudentArray.push(newStudent);
         res.send({ id: newId });
     }
@@ -51,7 +52,7 @@ app.put("/api/student/:id",(req,res) => {
     const matched =localStudentArray.findIndex((student) => student.id === Number(idToSearch));
     if(matched === -1){
         res.sendStatus(400);
-    }else{
+    } else {
         if(isNullOrUndefined(name) && isNullOrUndefined(currentClass) && isNullOrUndefined(division)){
             res.sendStatus(400);
         }else{
@@ -65,11 +66,10 @@ app.put("/api/student/:id",(req,res) => {
          if(!isNullOrUndefined(division)){
             localStudentArray[matched].division=division;
         }
-        else{
-            res.sendStatus(400);
+            res.sendStatus(200);
         }
     }
-    }
+    
     });
 
     app.delete("/api/student/:id",(req,res) => {
